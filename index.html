@@ -33,7 +33,7 @@
             position: relative;
         }
 
-        /* Анимированный живой фон */
+        /* Анимированный живой фон с переливами */
         .bg-glow {
             position: fixed;
             top: 0;
@@ -42,31 +42,51 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
+            background: radial-gradient(circle at center, #0a0f1d 0%, #030712 100%);
+        }
+
+        .glow-1, .glow-2, .glow-3 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            mix-blend-mode: screen;
+            animation: float 25s infinite alternate ease-in-out;
         }
 
         .glow-1 {
-            position: absolute;
+            width: 60vw;
+            height: 60vw;
             top: -10%;
             left: -10%;
-            width: 50%;
-            height: 50%;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
-            animation: move 20s infinite alternate;
+            background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
         }
 
         .glow-2 {
-            position: absolute;
-            bottom: -10%;
-            right: -10%;
-            width: 60%;
-            height: 60%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
-            animation: move 25s infinite alternate-reverse;
+            width: 50vw;
+            height: 50vw;
+            bottom: -5%;
+            right: -5%;
+            background: radial-gradient(circle, var(--accent-indigo) 0%, transparent 70%);
+            animation-duration: 30s;
+            animation-delay: -5s;
         }
 
-        @keyframes move {
-            from { transform: translate(0, 0) rotate(0deg); }
-            to { transform: translate(20%, 20%) rotate(20deg); }
+        .glow-3 {
+            width: 40vw;
+            height: 40vw;
+            top: 40%;
+            right: 10%;
+            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            animation-duration: 35s;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(10%, 15%) scale(1.1) rotate(10deg); }
+            66% { transform: translate(-5%, 20%) scale(0.9) rotate(-10deg); }
+            100% { transform: translate(0, 0) scale(1) rotate(0deg); }
         }
 
         .header {
@@ -256,6 +276,7 @@
     <div class="bg-glow">
         <div class="glow-1"></div>
         <div class="glow-2"></div>
+        <div class="glow-3"></div>
     </div>
 
     <header class="header">
