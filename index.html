@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMU Canteen | Poster Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>BMU Canteen | Clean Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #f1f5f9;
-            --text-dark: #0f172a;
+            --bg-light: #f8fafc;
+            --accent-blue: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
         }
 
         * {
@@ -21,156 +24,179 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            background: var(--bg-base);
-            color: var(--text-dark);
+            background: var(--bg-light);
+            color: var(--text-main);
             min-height: 100vh;
+            line-height: 1.5;
         }
 
         .header {
-            padding: 60px 20px 40px;
+            padding: 50px 20px 30px;
             text-align: center;
-            background: #fff;
-            border-bottom: 2px solid #000;
         }
 
         .header h1 {
-            font-size: clamp(40px, 12vw, 80px);
-            font-weight: 900;
+            font-size: clamp(32px, 8vw, 48px);
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: -4px;
-            line-height: 0.8;
-            color: #000;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            position: relative;
+            display: inline-block;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--accent-blue);
+            border-radius: 2px;
         }
 
         .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-            width: 100%;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
         }
-
-        /* Цветовые схемы для карточек */
-        .card-pink { --card-bg: #ec4899; --accent: #fbcfe8; }
-        .card-yellow { --card-bg: #eab308; --accent: #fef9c3; }
-        .card-indigo { --card-bg: #6366f1; --accent: #e0e7ff; }
-        .card-green { --card-bg: #22c55e; --accent: #dcfce7; }
-        .card-orange { --card-bg: #f97316; --accent: #ffedd5; }
-        .card-red { --card-bg: #ef4444; --accent: #fee2e2; }
 
         .menu-card {
-            background: var(--card-bg);
-            min-height: 100vh;
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 40px 25px;
-            color: #fff;
-            position: relative;
+            border: 1px solid rgba(0,0,0,0.03);
+            animation: fadeIn 0.8s ease-out both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .img-wrapper {
+            width: 100%;
+            aspect-ratio: 1 / 1;
             overflow: hidden;
-            border-bottom: 2px solid #000;
-        }
-
-        .item-name {
-            font-size: clamp(48px, 15vw, 90px);
-            font-weight: 900;
-            text-transform: uppercase;
-            line-height: 0.85;
-            letter-spacing: -3px;
-            z-index: 2;
-            margin-bottom: 20px;
-            word-break: break-word;
-        }
-
-        .img-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #f1f5f9;
             position: relative;
-            z-index: 1;
         }
 
         .item-img {
-            width: 85%;
-            max-height: 60vh;
-            object-fit: contain;
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
-            transform: rotate(-5deg);
-            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
         }
 
         .menu-card:hover .item-img {
-            transform: rotate(0deg) scale(1.05);
+            transform: scale(1.08);
         }
 
-        .item-footer {
-            z-index: 2;
-            margin-top: 30px;
+        .content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
-        .price-row {
+        .item-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .price-list {
+            margin-top: auto;
+            display: grid;
+            gap: 8px;
+        }
+
+        .price-item {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
-            border-top: 3px solid #fff;
-            padding-top: 20px;
-            margin-bottom: 15px;
+            align-items: center;
+            padding: 8px 12px;
+            background: #f8fafc;
+            border-radius: 12px;
+            transition: background 0.3s ease;
         }
 
-        .price-row .vol {
-            font-size: 20px;
+        .menu-card:hover .price-item {
+            background: #f1f5f9;
+        }
+
+        .vol {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .amt {
+            font-size: 16px;
             font-weight: 700;
-            opacity: 0.9;
-        }
-
-        .price-row .amt {
-            font-size: 32px;
-            font-weight: 900;
-        }
-
-        /* Плавные переходы */
-        .menu-card {
-            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100vh); }
-            to { transform: translateY(0); }
-        }
-
-        /* Десктопная версия (сетка) */
-        @media (min-width: 768px) {
-            .container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .menu-card {
-                min-height: 80vh;
-                border-right: 2px solid #000;
-            }
+            color: var(--accent-blue);
         }
 
         .loader {
             position: fixed;
             inset: 0;
-            background: #000;
-            color: #fff;
+            background: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            font-size: 24px;
-            letter-spacing: 5px;
-            z-index: 100;
-            text-transform: uppercase;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--accent-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Адаптив для мобильных */
+        @media (max-width: 640px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+            .header { padding-top: 30px; }
         }
     </style>
 </head>
 
 <body>
 
-    <div id="loader" class="loader">BMU LOADING...</div>
+    <div id="loader" class="loader">
+        <div class="spinner"></div>
+    </div>
 
     <header class="header">
-        <h1>BMU<br>CANTEEN</h1>
+        <h1>BMU CANTEEN</h1>
     </header>
 
     <main class="container" id="menu-container"></main>
@@ -178,8 +204,6 @@
     <script>
         const SHEET_ID = '1GqqzNX3FQlyi61DO93hkc-Z_Iw5RcJJXmvANP8LC8rA';
         const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
-
-        const colors = ['card-pink', 'card-yellow', 'card-indigo', 'card-green', 'card-orange', 'card-red'];
 
         async function initMenu() {
             try {
@@ -216,41 +240,43 @@
                         return link;
                     }
 
-                    const displayImg = (img && img.startsWith('http')) ? getDirectDriveLink(img) : '';
-                    const colorClass = colors[index % colors.length];
+                    const displayImg = (img && img.startsWith('http')) ? getDirectDriveLink(img) : 'https://images.unsplash.com/photo-1544145945-f904253d0c7b?q=80&w=400&auto=format&fit=crop';
 
-                    const section = document.createElement('section');
-                    section.className = `menu-card ${colorClass}`;
-                    section.style.animationDelay = `${index * 0.2}s`;
+                    const card = document.createElement('div');
+                    card.className = 'menu-card';
+                    card.style.animationDelay = `${index * 0.1}s`;
                     
-                    section.innerHTML = `
-                        <h2 class="item-name">${name}</h2>
-                        <div class="img-container">
-                            ${displayImg ? `<img src="${displayImg}" class="item-img" alt="${name}">` : ''}
+                    card.innerHTML = `
+                        <div class="img-wrapper">
+                            <img src="${displayImg}" class="item-img" alt="${name}" loading="lazy">
                         </div>
-                        <div class="item-footer">
-                            ${prices.split('/').map(p => {
-                                const parts = p.split('-');
-                                const vol = parts[0] ? parts[0].trim() : '';
-                                const prc = parts[1] ? parts[1].trim() : '';
-                                if(!vol && !prc) return '';
-                                return `
-                                    <div class="price-row">
-                                        <span class="vol">${vol}</span>
-                                        <span class="amt">${prc}</span>
-                                    </div>
-                                `;
-                            }).join('')}
+                        <div class="content">
+                            <h2 class="item-name">${name}</h2>
+                            <div class="price-list">
+                                ${prices.split('/').map(p => {
+                                    const parts = p.split('-');
+                                    const vol = parts[0] ? parts[0].trim() : '';
+                                    const prc = parts[1] ? parts[1].trim() : '';
+                                    if(!vol && !prc) return '';
+                                    return `
+                                        <div class="price-item">
+                                            <span class="vol">${vol}</span>
+                                            <span class="amt">${prc}</span>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
                         </div>
                     `;
-                    container.appendChild(section);
+                    container.appendChild(card);
                 });
 
-                loader.style.display = 'none';
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
 
             } catch (e) {
                 console.error(e);
-                document.getElementById('loader').innerText = 'ERROR LOADING';
+                document.getElementById('loader').innerHTML = 'Error loading menu';
             }
         }
 
