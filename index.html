@@ -87,24 +87,23 @@
 
         .header h1 {
             font-size: clamp(32px, 8vw, 48px);
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: -1px;
             color: #fff;
-            position: relative;
-            display: inline-block;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .header h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 3px;
-            background: var(--accent-blue);
-            border-radius: 2px;
+        .header .cafe-text {
+            display: block;
+            font-size: clamp(12px, 3vw, 16px);
+            font-weight: 400;
+            letter-spacing: 8px;
+            margin-top: 5px;
+            color: var(--accent-blue);
+            text-indent: 8px; /* Центрируем из-за letter-spacing */
         }
 
         .container {
@@ -257,7 +256,7 @@
     </div>
 
     <header class="header">
-        <h1>BMU CANTEEN</h1>
+        <h1>BMU <span class="cafe-text">CAFETERIA</span></h1>
     </header>
 
     <main class="container" id="menu-container"></main>
