@@ -4,17 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMU Canteen | Professional Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>BMU Canteen | Poster Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #030712;
-            --accent-blue: #38bdf8;
-            --accent-indigo: #6366f1;
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.07);
-            --text-main: #f8fafc;
-            --text-dim: #64748b;
+            --bg-base: #f1f5f9;
+            --text-dark: #0f172a;
         }
 
         * {
@@ -26,299 +21,165 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            background: var(--bg-deep);
-            color: var(--text-main);
+            background: var(--bg-base);
+            color: var(--text-dark);
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Анимированный живой фон с глубокими переливами */
-        .bg-glow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            background: #030712;
-        }
-
-        .glow-1, .glow-2, .glow-3, .glow-4 {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.2;
-            mix-blend-mode: screen;
-            animation: float 20s infinite alternate ease-in-out;
-        }
-
-        .glow-1 {
-            width: 80vw; height: 80vw;
-            top: -20%; left: -20%;
-            background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
-        }
-
-        .glow-2 {
-            width: 70vw; height: 70vw;
-            bottom: -10%; right: -10%;
-            background: radial-gradient(circle, var(--accent-indigo) 0%, transparent 70%);
-            animation-duration: 25s; animation-delay: -5s;
-        }
-
-        .glow-3 {
-            width: 50vw; height: 50vw;
-            top: 20%; right: -10%;
-            background: radial-gradient(circle, #ec4899 0%, transparent 70%);
-            animation-duration: 30s; animation-delay: -10s;
-        }
-
-        .glow-4 {
-            width: 60vw; height: 60vw;
-            bottom: 10%; left: 10%;
-            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
-            animation-duration: 22s; animation-delay: -15s;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            50% { transform: translate(15%, 10%) scale(1.1) rotate(5deg); }
-            100% { transform: translate(-5%, 15%) scale(0.9) rotate(-5deg); }
         }
 
         .header {
-            padding: clamp(30px, 5vh, 40px) 20px 10px;
-            max-width: 800px;
-            margin: 0 auto;
+            padding: 60px 20px 40px;
             text-align: center;
-            perspective: 1000px;
+            background: #fff;
+            border-bottom: 2px solid #000;
         }
 
         .header h1 {
-            font-size: clamp(32px, 10vw, 64px);
-            font-weight: 800;
-            line-height: 0.85;
+            font-size: clamp(40px, 12vw, 80px);
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: -2px;
-            background: linear-gradient(to bottom, #fff 40%, #475569);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-            animation: headerEntrance 1.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        @keyframes headerEntrance {
-            from { opacity: 0; transform: translateY(30px) rotateX(-20deg); }
-            to { opacity: 1; transform: translateY(0) rotateX(0); }
+            letter-spacing: -4px;
+            line-height: 0.8;
+            color: #000;
         }
 
         .container {
-            flex: 1;
-            padding: 0 20px clamp(40px, 8vh, 80px);
-            max-width: 680px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
             width: 100%;
         }
 
+        /* Цветовые схемы для карточек */
+        .card-pink { --card-bg: #ec4899; --accent: #fbcfe8; }
+        .card-yellow { --card-bg: #eab308; --accent: #fef9c3; }
+        .card-indigo { --card-bg: #6366f1; --accent: #e0e7ff; }
+        .card-green { --card-bg: #22c55e; --accent: #dcfce7; }
+        .card-orange { --card-bg: #f97316; --accent: #ffedd5; }
+        .card-red { --card-bg: #ef4444; --accent: #fee2e2; }
+
         .menu-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            -webkit-backdrop-filter: blur(24px);
-            backdrop-filter: blur(24px);
-            border-radius: clamp(20px, 4vw, 32px);
-            padding: clamp(10px, 2.5vw, 16px);
+            background: var(--card-bg);
+            min-height: 100vh;
             display: flex;
-            gap: clamp(12px, 3vw, 24px);
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 25px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid #000;
+        }
+
+        .item-name {
+            font-size: clamp(48px, 15vw, 90px);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.85;
+            letter-spacing: -3px;
+            z-index: 2;
+            margin-bottom: 20px;
+            word-break: break-word;
+        }
+
+        .img-container {
+            flex: 1;
+            display: flex;
             align-items: center;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            animation: cardFade 1s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-            cursor: pointer;
+            justify-content: center;
             position: relative;
-            overflow: hidden;
-        }
-
-        /* Эффект Блеска (Shine) */
-        .menu-card::after {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: -100%;
-            width: 300%;
-            height: 300%;
-            background: linear-gradient(
-                45deg,
-                transparent 45%,
-                rgba(255, 255, 255, 0.05) 50%,
-                transparent 55%
-            );
-            transition: all 0.8s ease;
-            pointer-events: none;
-            transform: translate(-100%, -100%);
-        }
-
-        .menu-card:hover::after {
-            transform: translate(100%, 100%);
-        }
-
-        @keyframes cardFade {
-            from { opacity: 0; transform: translateY(40px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .menu-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(56, 189, 248, 0.5);
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 
-                0 25px 50px -12px rgba(0, 0, 0, 0.5),
-                0 0 20px rgba(56, 189, 248, 0.15);
-        }
-
-        .img-wrapper {
-            width: clamp(90px, 20vw, 130px);
-            height: clamp(110px, 25vw, 150px);
-            flex-shrink: 0;
-            border-radius: clamp(16px, 3vw, 24px);
-            overflow: hidden;
-            background: #0f172a;
-            position: relative;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            z-index: 1;
         }
 
         .item-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 85%;
+            max-height: 60vh;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+            transform: rotate(-5deg);
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         .menu-card:hover .item-img {
-            transform: scale(1.18);
+            transform: rotate(0deg) scale(1.05);
         }
 
-        .item-info {
-            flex: 1;
-            padding: 2px 0;
+        .item-footer {
+            z-index: 2;
+            margin-top: 30px;
         }
 
-        .item-info h3 {
-            font-size: clamp(18px, 4vw, 22px);
-            font-weight: 600;
-            margin-bottom: clamp(8px, 2vw, 12px);
-            color: #fff;
-            letter-spacing: -0.5px;
-            transition: color 0.3s ease;
-        }
-
-        .menu-card:hover h3 {
-            color: var(--accent-blue);
-        }
-
-        .price-list {
-            display: grid;
-            gap: 8px;
-        }
-
-        .price-tag {
+        .price-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 8px clamp(10px, 2.5vw, 16px);
-            border-radius: clamp(10px, 2.5vw, 14px);
-            border: 1px solid rgba(255, 255, 255, 0.01);
-            transition: all 0.4s ease;
-            /* Каскадное появление */
-            animation: slideLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+            align-items: flex-end;
+            border-top: 3px solid #fff;
+            padding-top: 20px;
+            margin-bottom: 15px;
         }
 
-        @keyframes slideLeft {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .menu-card:hover .price-tag {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.08);
-            transform: translateX(5px);
-        }
-
-        .price-tag .vol {
-            font-size: clamp(10px, 2vw, 11px);
-            color: var(--text-dim);
-            font-weight: 500;
-        }
-
-        .price-tag .amt {
-            font-size: clamp(13px, 3vw, 15px);
+        .price-row .vol {
+            font-size: 20px;
             font-weight: 700;
-            color: var(--accent-blue);
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+            opacity: 0.9;
+        }
+
+        .price-row .amt {
+            font-size: 32px;
+            font-weight: 900;
+        }
+
+        /* Плавные переходы */
+        .menu-card {
+            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100vh); }
+            to { transform: translateY(0); }
+        }
+
+        /* Десктопная версия (сетка) */
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .menu-card {
+                min-height: 80vh;
+                border-right: 2px solid #000;
+            }
         }
 
         .loader {
-            text-align: center;
-            padding: 100px 0;
-            color: var(--text-dim);
-            font-size: 14px;
-            font-weight: 600;
+            position: fixed;
+            inset: 0;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 24px;
             letter-spacing: 5px;
+            z-index: 100;
             text-transform: uppercase;
-        }
-
-        /* Адаптив для мобильных устройств */
-        @media (max-width: 600px) {
-            .container { padding: 0 15px 60px; }
-            .menu-card { 
-                flex-direction: column; 
-                text-align: center;
-                padding: 15px;
-            }
-            .img-wrapper { 
-                width: 100%; 
-                height: 240px; 
-            }
-            .item-info { 
-                padding: 0; 
-                width: 100%;
-            }
-            .price-list {
-                max-width: 300px;
-                margin: 0 auto;
-                width: 100%;
-            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="bg-glow">
-        <div class="glow-1"></div>
-        <div class="glow-2"></div>
-        <div class="glow-3"></div>
-        <div class="glow-4"></div>
-    </div>
+    <div id="loader" class="loader">BMU LOADING...</div>
 
     <header class="header">
         <h1>BMU<br>CANTEEN</h1>
     </header>
 
-    <main class="container" id="menu-container">
-        <div class="loader">ПОДГРУЖАЕМ МЕНЮ...</div>
-    </main>
+    <main class="container" id="menu-container"></main>
 
     <script>
         const SHEET_ID = '1GqqzNX3FQlyi61DO93hkc-Z_Iw5RcJJXmvANP8LC8rA';
         const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
+
+        const colors = ['card-pink', 'card-yellow', 'card-indigo', 'card-green', 'card-orange', 'card-red'];
 
         async function initMenu() {
             try {
@@ -327,20 +188,19 @@
                 const rows = data.split('\n').map(r => r.trim()).filter(r => r.length > 0);
                 
                 const container = document.getElementById('menu-container');
+                const loader = document.getElementById('loader');
                 container.innerHTML = '';
 
-                // Если таблица пустая или содержит только заголовки, используем данные пользователя
                 const hasRealData = rows.some(r => !r.includes('Название') && !r.includes('Столбец') && r.split(',').length > 1);
                 
                 const menuToRender = hasRealData ? rows : [
-                    ',Лимонад,350мл - 20.000 / 500мл - 25.000 / 700мл - 30.000,https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=400&auto=format&fit=crop',
-                    ',Айсти,350мл - 25.000 / 500мл - 30.000 / 700мл - 35.000,https://images.unsplash.com/photo-1499638673689-79a0b5115d87?q=80&w=400&auto=format&fit=crop',
-                    ',Горячий чай,400мл - 25.000 / 500мл - 30.000,https://images.unsplash.com/photo-1544145945-f904253d0c7b?q=80&w=400&auto=format&fit=crop'
+                    ',Лимонад,350мл - 20.000 / 500мл - 25.000 / 700мл - 30.000,https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=600&auto=format&fit=crop',
+                    ',Айсти,350мл - 25.000 / 500мл - 30.000 / 700мл - 35.000,https://images.unsplash.com/photo-1499638673689-79a0b5115d87?q=80&w=600&auto=format&fit=crop',
+                    ',Горячий чай,400мл - 25.000 / 500мл - 30.000,https://images.unsplash.com/photo-1544145945-f904253d0c7b?q=80&w=600&auto=format&fit=crop'
                 ];
 
                 menuToRender.forEach((row, index) => {
                     const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/"/g, '').trim());
-                    
                     if (cols.filter(c => c.length > 0).length < 2) return;
                     if (row.includes('Название') || row.includes('Столбец')) return;
 
@@ -348,57 +208,49 @@
                     const prices = cols[2] || cols[1];
                     const img = cols[3] || cols[2] || '';
 
-                    if (!name || name.length < 2) return;
-
                     function getDirectDriveLink(link) {
                         if (link.includes('drive.google.com')) {
                             const match = link.match(/\/d\/([^/]+)/) || link.match(/id=([^&]+)/);
-                            if (match && match[1]) {
-                                return `https://lh3.googleusercontent.com/d/${match[1]}`;
-                            }
+                            if (match && match[1]) return `https://lh3.googleusercontent.com/d/${match[1]}`;
                         }
                         return link;
                     }
 
-                    const displayImg = (img && img.startsWith('http')) ? getDirectDriveLink(img) : 'https://images.unsplash.com/photo-1544145945-f904253d0c7b?q=80&w=200&auto=format&fit=crop';
-                    const placeholderSvg = `data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22120%22%20height%3D%22140%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%231e293b%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22sans-serif%22%20font-size%3D%2216%22%20fill%3D%22%2338bdf8%22%20text-anchor%3D%22middle%22%20dy%3D%22.3em%22%3EBMU%3C/text%3E%3C/svg%3E`;
+                    const displayImg = (img && img.startsWith('http')) ? getDirectDriveLink(img) : '';
+                    const colorClass = colors[index % colors.length];
 
-                    const card = document.createElement('div');
-                    card.className = 'menu-card';
-                    card.style.animationDelay = `${index * 0.1}s`;
+                    const section = document.createElement('section');
+                    section.className = `menu-card ${colorClass}`;
+                    section.style.animationDelay = `${index * 0.2}s`;
                     
-                    card.innerHTML = `
-                        <div class="img-wrapper">
-                            <img src="${displayImg}" class="item-img" alt="${name}" onerror="this.src='${placeholderSvg}'">
+                    section.innerHTML = `
+                        <h2 class="item-name">${name}</h2>
+                        <div class="img-container">
+                            ${displayImg ? `<img src="${displayImg}" class="item-img" alt="${name}">` : ''}
                         </div>
-                        <div class="item-info">
-                            <h3>${name}</h3>
-                            <div class="price-list">
-                                ${prices.split('/').map((p, pIndex) => {
-                                    const parts = p.split('-');
-                                    const vol = parts[0] ? parts[0].trim() : '';
-                                    const prc = parts[1] ? parts[1].trim() : '';
-                                    if(!vol && !prc) return '';
-                                    return `
-                                        <div class="price-tag" style="animation-delay: ${0.2 + (pIndex * 0.1)}s">
-                                            <span class="vol">${vol}</span>
-                                            <span class="amt">${prc}</span>
-                                        </div>
-                                    `;
-                                }).join('')}
-                            </div>
+                        <div class="item-footer">
+                            ${prices.split('/').map(p => {
+                                const parts = p.split('-');
+                                const vol = parts[0] ? parts[0].trim() : '';
+                                const prc = parts[1] ? parts[1].trim() : '';
+                                if(!vol && !prc) return '';
+                                return `
+                                    <div class="price-row">
+                                        <span class="vol">${vol}</span>
+                                        <span class="amt">${prc}</span>
+                                    </div>
+                                `;
+                            }).join('')}
                         </div>
                     `;
-                    container.appendChild(card);
+                    container.appendChild(section);
                 });
 
-                if (container.children.length === 0) {
-                    container.innerHTML = '<div class="loader">МЕНЮ ПОКА ПУСТО</div>';
-                }
+                loader.style.display = 'none';
 
             } catch (e) {
                 console.error(e);
-                document.getElementById('menu-container').innerHTML = '<div class="loader">ОШИБКА ЗАГРУЗКИ. ПРОВЕРЬТЕ ТАБЛИЦУ.</div>';
+                document.getElementById('loader').innerText = 'ERROR LOADING';
             }
         }
 
