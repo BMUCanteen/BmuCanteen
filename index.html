@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMU Canteen | Clean Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #030712;
@@ -86,24 +86,25 @@
         }
 
         .header h1 {
-            font-size: clamp(32px, 8vw, 48px);
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(32px, 8vw, 56px);
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: -1px;
+            letter-spacing: -2px;
             color: #fff;
-            background: linear-gradient(to bottom, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 5px;
         }
 
         .header .cafe-text {
             display: block;
-            font-size: clamp(12px, 3vw, 16px);
-            font-weight: 400;
-            letter-spacing: 8px;
-            margin-top: 5px;
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(10px, 2.5vw, 14px);
+            font-weight: 600;
+            letter-spacing: 12px;
             color: var(--accent-blue);
-            text-indent: 8px; /* Центрируем из-за letter-spacing */
+            text-indent: 12px;
+            opacity: 0.8;
         }
 
         .container {
