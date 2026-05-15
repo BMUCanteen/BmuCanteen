@@ -305,9 +305,9 @@
                 const hasRealData = rows.some(r => !r.includes('Название') && !r.includes('Столбец') && r.split(',').length > 1);
                 
                 const menuToRender = hasRealData ? rows : [
-                    ',Лимонад,350мл - 20.000 / 500мл - 25.000 / 700мл - 30.000,https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=600&auto=format&fit=crop',
-                    ',Айсти,350мл - 25.000 / 500мл - 30.000 / 700мл - 35.000,https://images.unsplash.com/photo-1499638673689-79a0b5115d87?q=80&w=600&auto=format&fit=crop',
-                    ',Горячий чай,400мл - 25.000 / 500мл - 30.000,https://images.unsplash.com/photo-1544145945-f904253d0c7b?q=80&w=600&auto=format&fit=crop'
+                    ',Лимонад,350мл - 20.000 / 500мл - 25.000 / 700мл - 30.000,img/lemonade.png',
+                    ',Айсти,350мл - 25.000 / 500мл - 30.000 / 700мл - 35.000,img/iced_tea.png',
+                    ',Горячий чай,400мл - 25.000 / 500мл - 30.000,img/hot_tea.png'
                 ];
 
                 menuToRender.forEach((row, index) => {
@@ -334,7 +334,13 @@
                         return link;
                     }
 
-                    const displayImg = (img && img.startsWith('http')) ? getDirectDriveLink(img) : 'https://images.unsplash.com/photo-1544145945-f904253d0c7b?q=80&w=400&auto=format&fit=crop';
+                    let displayImg = (img && img.startsWith('http')) ? getDirectDriveLink(img) : '';
+                    if (!displayImg) {
+                        if (name.toLowerCase().includes('лимонад')) displayImg = 'img/lemonade.png';
+                        else if (name.toLowerCase().includes('айсти') || name.toLowerCase().includes('iced')) displayImg = 'img/iced_tea.png';
+                        else if (name.toLowerCase().includes('чай') || name.toLowerCase().includes('tea')) displayImg = 'img/hot_tea.png';
+                        else displayImg = 'img/hot_tea.png'; // Fallback
+                    }
 
                     const card = document.createElement('div');
                     card.className = `menu-card ${categoryClass}`;
