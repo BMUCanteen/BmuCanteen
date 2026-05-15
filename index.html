@@ -70,28 +70,28 @@
         }
 
         .header {
-            padding: clamp(60px, 10vh, 100px) 20px 40px;
-            max-width: 1000px;
+            padding: clamp(40px, 8vh, 60px) 20px 30px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
         }
 
         .header p {
             color: var(--accent-blue);
-            font-size: clamp(10px, 2vw, 12px);
+            font-size: clamp(9px, 1.5vw, 10px);
             font-weight: 700;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             animation: slideDown 1s ease-out;
         }
 
         .header h1 {
-            font-size: clamp(40px, 15vw, 90px);
+            font-size: clamp(32px, 10vw, 64px);
             font-weight: 800;
             line-height: 0.85;
             text-transform: uppercase;
-            letter-spacing: -3px;
+            letter-spacing: -2px;
             background: linear-gradient(to bottom, #fff 40%, #475569);
             -webkit-background-clip: text;
             background-clip: text;
@@ -100,13 +100,23 @@
             animation: scaleIn 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
         .container {
-            padding: 0 20px 100px;
-            max-width: 900px; /* Увеличил ширину для десктопа */
+            padding: 0 20px 80px;
+            max-width: 680px; /* Уменьшил ширину для компактности */
             margin: 0 auto;
             display: grid;
-            gap: 24px;
-            width: 100%; /* Занимает всю доступную ширину до макс-лимита */
+            gap: 20px;
+            width: 100%;
         }
 
         .menu-card {
@@ -114,10 +124,10 @@
             border: 1px solid var(--glass-border);
             -webkit-backdrop-filter: blur(24px);
             backdrop-filter: blur(24px);
-            border-radius: clamp(24px, 5vw, 40px);
-            padding: clamp(12px, 3vw, 20px);
+            border-radius: clamp(20px, 4vw, 32px);
+            padding: clamp(10px, 2.5vw, 16px);
             display: flex;
-            gap: clamp(15px, 4vw, 30px);
+            gap: clamp(12px, 3vw, 24px);
             align-items: center;
             transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
             animation: cardFade 0.8s ease backwards;
@@ -132,17 +142,17 @@
         .menu-card:hover {
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(56, 189, 248, 0.4);
-            transform: translateY(-8px) scale(1.01);
+            transform: translateY(-5px) scale(1.01);
             box-shadow: 
-                0 20px 40px rgba(0,0,0,0.4),
-                0 0 20px rgba(56, 189, 248, 0.1);
+                0 15px 30px rgba(0,0,0,0.3),
+                0 0 15px rgba(56, 189, 248, 0.1);
         }
 
         .img-wrapper {
-            width: clamp(110px, 25vw, 160px);
-            height: clamp(130px, 30vw, 180px);
+            width: clamp(90px, 20vw, 130px);
+            height: clamp(110px, 25vw, 150px);
             flex-shrink: 0;
-            border-radius: clamp(18px, 4vw, 32px);
+            border-radius: clamp(16px, 3vw, 24px);
             overflow: hidden;
             background: #0f172a;
             position: relative;
@@ -161,49 +171,49 @@
 
         .item-info {
             flex: 1;
-            padding: 5px 0;
+            padding: 2px 0;
         }
 
         .item-info h3 {
-            font-size: clamp(20px, 5vw, 28px);
+            font-size: clamp(18px, 4vw, 22px);
             font-weight: 600;
-            margin-bottom: clamp(10px, 3vw, 15px);
+            margin-bottom: clamp(8px, 2vw, 12px);
             color: #fff;
             letter-spacing: -0.5px;
         }
 
         .price-list {
             display: grid;
-            gap: 10px;
+            gap: 8px;
         }
 
         .price-tag {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 10px clamp(12px, 3vw, 20px);
-            border-radius: clamp(12px, 3vw, 18px);
-            border: 1px solid rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.01);
+            padding: 8px clamp(10px, 2.5vw, 16px);
+            border-radius: clamp(10px, 2.5vw, 14px);
+            border: 1px solid rgba(255, 255, 255, 0.01);
             transition: all 0.3s ease;
         }
 
         .menu-card:hover .price-tag {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.04);
         }
 
         .price-tag .vol {
-            font-size: clamp(11px, 2.5vw, 13px);
+            font-size: clamp(10px, 2vw, 11px);
             color: var(--text-dim);
             font-weight: 500;
         }
 
         .price-tag .amt {
-            font-size: clamp(14px, 3.5vw, 18px);
+            font-size: clamp(13px, 3vw, 15px);
             font-weight: 700;
             color: var(--accent-blue);
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
         }
 
         .loader {
@@ -291,7 +301,6 @@
 
                     if (!name || name.length < 2) return;
 
-                    // Улучшенная конвертация Google Drive ссылок
                     function getDirectDriveLink(link) {
                         if (link.includes('drive.google.com')) {
                             const match = link.match(/\/d\/([^/]+)/) || link.match(/id=([^&]+)/);
